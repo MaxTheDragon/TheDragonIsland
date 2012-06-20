@@ -22,6 +22,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         tdi_analytics_id: %tdi_analytics_id%
+        tdi_facebook:     %tdi_facebook%
 
 # Assetic Configuration
 assetic:
