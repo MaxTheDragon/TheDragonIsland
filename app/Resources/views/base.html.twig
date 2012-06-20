@@ -1,13 +1,52 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Dragon Island{% if title|default %} - {{ title }}{% endif %}</title>
+  <meta name="description" content="A browser-based social MMORPG">
+  <meta name="viewport" content="width=device-width">
+
+  <!-- For third-generation iPad with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
+  <!-- For iPhone with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+  <!-- For first- and second-generation iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+  <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+  <link rel="stylesheet" href="{{ asset('bundles/tdiwebsite/css/style.css') }}">
+</head>
+<body>
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is not supported by The Dragon Island. <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to view this website correctly.</p><![endif]-->
+
+  {% if tdi_facebook|default %}
+  <div id="fb-root"></div>
+  <script>(function(a,b,c){var d,e=a.getElementsByTagName(b)[0];if(a.getElementById(c))return;d=a.createElement(b);d.id=c;d.src="//connect.facebook.net/en_GB/all.js#xfbml=1";e.parentNode.insertBefore(d,e)}(document,"script","facebook-jssdk"))</script>
+  {% endif %}
+
+  <div id="container">
+    {% block container %}
+    <header>
+      {% block header %}{% endblock header %}
+    </header>
+    <div role="main">
+      {% block main %}{% endblock main %}
+    </div>
+    <footer>
+      {% block footer %}{% endblock footer %}
+    </footer>
+    {% endblock container %}
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="{{ asset('bundles/tdiwebsite/js/jquery-1.7.2.min.js') }}"><\/script>')</script>
+
+  {% if tdi_analytics_id|default %}
+  <script>var _gaq=[['_setAccount','{{ tdi_analytics_id }}'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+  {% endif %}
+</body>
 </html>
