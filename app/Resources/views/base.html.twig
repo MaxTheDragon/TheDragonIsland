@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <title>The Dragon Island{% if title|default %} - {{ title }}{% endif %}</title>
   <meta name="description" content="A browser-based social MMORPG">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- For third-generation iPad with high-resolution Retina display: -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
@@ -18,7 +18,13 @@
   <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
 
-  <link rel="stylesheet" href="{{ asset('bundles/tdiwebsite/css/style.css') }}">
+  {% block stylesheets %}
+  {% stylesheets filter='less'
+    '@TDIWebsiteBundle/Resources/public/less/bootstrap.less'
+  %}
+   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="all">
+  {% endstylesheets %}
+  {% endblock stylesheets %}
 </head>
 <body>
   <!--[if lt IE 7]><p class=chromeframe>Your browser is not supported by The Dragon Island. <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to view this website correctly.</p><![endif]-->
@@ -42,8 +48,10 @@
     {% endblock container %}
   </div>
 
+  {% block javascripts %}
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="{{ asset('bundles/tdiwebsite/js/jquery-1.7.2.min.js') }}"><\/script>')</script>
+  {% endblock javascripts %}
 
   {% if tdi_analytics_id|default %}
   <script>var _gaq=[['_setAccount','{{ tdi_analytics_id }}'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
